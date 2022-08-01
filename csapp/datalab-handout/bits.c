@@ -1,3 +1,4 @@
+#include<stdio.h>
 /* 
  * CS:APP Data Lab 
  * 
@@ -162,8 +163,16 @@ int getByte(int x, int n) {
  *   Rating: 3 
  */
 int logicalShift(int x, int n) {
-	int mask =(((1<<n)-1)<<(32-n))^((0xFF)+(0xFF<<8)+(0xFF<<16)+(0xFF<<24));
-	return mask & (x>>n);
+	//
+	//return ((((1<<n)&(~1 + 1))<<(32&(~(1<<n) + 1)))^((0xFF)+(0xFF<<8)+(0xFF<<16)+(0xFF<<24))) & (x>>n);
+	//return (~(((0xFF)+(0xFF<<8)+(0xFF<<16)+(0xFF<<24))<<(32 + (~n +1))))&(x>>n);
+	int result = 32 + (~n + 1);
+	printf("------------------------\n%d\n", result);
+	//result = ((0xFF)+(0xFF<<8)+(0xFF<<16)+(0xFF<<24))<<result;
+	printf("shift by 0  %x\n", ((0xFF)+(0xFF<<8)+(0xFF<<16)+(0xFF<<24))<<0);
+	printf("shift by 32 %x\n", ((0xFF)+(0xFF<<8)+(0xFF<<16)+(0xFF<<24))<<32);
+	printf("shift by %d %x\n", result, ((0xFF)+(0xFF<<8)+(0xFF<<16)+(0xFF<<24))<<result);
+	return result;
 }
 /*
  * bitCount - returns count of number of 1's in word
